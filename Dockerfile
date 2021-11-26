@@ -14,21 +14,11 @@ RUN apt-get update && \
         byacc \
         dos2unix \
         xa65 \
-        libgl1-mesa-glx \
-        libsm6 \
-        libxext6 \
-        ffmpeg \
         xutils-dev \
-        libsdl2-2.0-0 \
-        libsdl2-dev \
-        libsdl2-image-dev \
-        libsdl2-gfx-dev \
-        libsdl2-mixer-dev \
-        libsdl2-net-dev \
-        libsdl2-ttf-dev \
-        
-        libreadline6-dev \
-        libncurses5-dev \        
+        libgtk-3-dev \
+        libglew-dev \
+        libpulse-dev \
+        libasound2-dev \
         libpng-dev \
     && \
     rm -rf /var/lib/apt/lists/* && \
@@ -39,7 +29,7 @@ RUN apt-get update && \
 
 WORKDIR /opt/vice
 
-RUN ./configure --disable-pdf-docs --enable-arch=no && \
+RUN ./configure --disable-pdf-docs && \
     make && \ 
     make install
 
@@ -48,4 +38,3 @@ WORKDIR /
 RUN rm -r /opt/vice
 
 ENV DISPLAY=":0.0"
-ENV PATH="${PATH}:/usr/local/bin"
