@@ -1,6 +1,6 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
-ENV VICE_VER=3.5
+ENV VICE_VER=3.8
 ENV VICE_BASE="vice-${VICE_VER}"
 ENV VICE_ARCH="${VICE_BASE}.tar.gz"
 
@@ -13,6 +13,7 @@ RUN apt-get update && \
         flex \
         byacc \
         dos2unix \
+        file \
         xa65 \
         xutils-dev \
         libgtk-3-dev \
@@ -20,6 +21,7 @@ RUN apt-get update && \
         libpulse-dev \
         libasound2-dev \
         libpng-dev \
+        libcurl4-openssl-dev \
     && \
     rm -rf /var/lib/apt/lists/* && \
     wget https://sourceforge.net/projects/vice-emu/files/releases/${VICE_ARCH} && \
@@ -30,7 +32,7 @@ RUN apt-get update && \
 WORKDIR /opt/vice
 
 RUN ./configure --disable-pdf-docs && \
-    make && \ 
+    make && \
     make install
 
 WORKDIR /
